@@ -8,15 +8,18 @@ public class empWageBuilder {
 		int partTimeHour = 4;
 		int dailyWage = 0;
 		double empCheck = Math.floor(Math.random() * 10) % 3;
-		if (empCheck == IS_FULL_TIME) {
-			dailyWage = (wagePerHour * fullDayHour);
-			System.out.println("Daily Wage of the Employee is: " +dailyWage);
+		switch ((int)empCheck) {
+			case 1:
+				dailyWage = (wagePerHour * fullDayHour);
+				System.out.println("Daily Wage of the Employee is: " +dailyWage);
+				break;
+			case 2:
+				dailyWage = (wagePerHour * partTimeHour);
+	                        System.out.println("Daily Wage of the Employee is: " +dailyWage);
+				break;
+			default:
+				System.out.println("Daily Wage of the Employee is: " +dailyWage);
+				break;
 		}
-		else if (empCheck == IS_PART_TIME) {
-			dailyWage = (wagePerHour * partTimeHour);
-                        System.out.println("Daily Wage of the Employee is: " +dailyWage);
-		}
-		else
-			System.out.println("Daily Wage of the Employee is: " +dailyWage);
 	}
 }
