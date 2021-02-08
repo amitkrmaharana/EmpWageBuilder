@@ -8,23 +8,30 @@ public class empWageBuilder {
 		int partTimeHour = 4;
 		int dailyWage;
 		int monthlyWage = 0;
-		for (int i=1;i<=20;i++) {
+		int totalWorkingHours = 0;
+		int totalWorkingDays = 0;
+		while (totalWorkingHours < 100 && totalWorkingDays < 20) {
 			double empCheck = Math.floor(Math.random() * 10) % 3;
 			switch ((int)empCheck) {
 				case 1:
 					dailyWage = (wagePerHour * fullDayHour);
 					monthlyWage+=dailyWage;
+					totalWorkingHours+=fullDayHour;
 					break;
 				case 2:
 					dailyWage = (wagePerHour * partTimeHour);
 		                        monthlyWage+=dailyWage;
+					totalWorkingHours+=partTimeHour;
 					break;
 				default:
 					dailyWage = 0;
 					monthlyWage+=dailyWage;
 					break;
 			}
+			totalWorkingDays++;
 		}
 		System.out.println("Monthly Wage of the Employee is: " +monthlyWage);
+		System.out.println("Total Working Hours are: " +totalWorkingHours);
+		System.out.println("Total Working Days are: " +totalWorkingDays);
 	}
 }
