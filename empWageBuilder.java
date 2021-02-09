@@ -1,4 +1,4 @@
-public class empWageBuilder {
+public class EmpWageBuilder {
 	public static void main(String[] args) {
 		System.out.println("Welcome to Employee Wage Computation Program on Master Branch");
 		int IS_FULL_TIME = 1;
