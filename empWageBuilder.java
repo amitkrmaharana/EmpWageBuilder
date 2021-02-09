@@ -1,9 +1,12 @@
 public class empWageBuilder {
+
+
+	public static final int IS_FULL_TIME = 1;
+        public static final int IS_PART_TIME = 2;
+	public static final int WAGE_PER_HOUR = 20;
+
 	public static void main(String[] args) {
 		System.out.println("Welcome to Employee Wage Computation Program on Master Branch");
-		int IS_FULL_TIME = 1;
-		int IS_PART_TIME = 2;
-		int wagePerHour = 20;
 		int fullDayHour = 8;
 		int partTimeHour = 4;
 		int dailyWage;
@@ -12,11 +15,11 @@ public class empWageBuilder {
 			double empCheck = Math.floor(Math.random() * 10) % 3;
 			switch ((int)empCheck) {
 				case 1:
-					dailyWage = (wagePerHour * fullDayHour);
+					dailyWage = (WAGE_PER_HOUR * fullDayHour);
 					monthlyWage+=dailyWage;
 					break;
 				case 2:
-					dailyWage = (wagePerHour * partTimeHour);
+					dailyWage = (WAGE_PER_HOUR * partTimeHour);
 		                        monthlyWage+=dailyWage;
 					break;
 				default:
