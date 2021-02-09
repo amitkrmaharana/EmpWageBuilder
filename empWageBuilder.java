@@ -1,4 +1,4 @@
-public class empWageBuilder {
+public class EmpWageBuilder {
 
 
 	public static final int IS_FULL_TIME = 1;
