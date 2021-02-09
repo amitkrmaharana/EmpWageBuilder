@@ -16,12 +16,12 @@ public class empWageBuilder {
 		while (totalWorkingHours < 100 && totalWorkingDays < 20) {
 			double empCheck = Math.floor(Math.random() * 10) % 3;
 			switch ((int)empCheck) {
-				case 1:
+				case IS_FULL_TIME:
 					dailyWage = (WAGE_PER_HOUR * fullDayHour);
 					monthlyWage+=dailyWage;
 					totalWorkingHours+=fullDayHour;
 					break;
-				case 2:
+				case IS_PART_TIME:
 					dailyWage = (WAGE_PER_HOUR * partTimeHour);
 		                        monthlyWage+=dailyWage;
 					totalWorkingHours+=partTimeHour;
