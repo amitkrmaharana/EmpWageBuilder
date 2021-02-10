@@ -9,22 +9,22 @@ public class EmpWageBuilder {
 		System.out.println("Welcome to Employee Wage Computation Program on Master Branch");
 		int fullDayHour = 8;
 		int partTimeHour = 4;
-		int dailyWage;
+		int dailyWage = 0;
 		int monthlyWage = 0;
 		for (int i=1;i<=20;i++) {
 			double empCheck = Math.floor(Math.random() * 10) % 3;
 			switch ((int)empCheck) {
 				case IS_FULL_TIME:
 					dailyWage = (WAGE_PER_HOUR * fullDayHour);
-					monthlyWage+=dailyWage;
+					monthlyWage += dailyWage;
 					break;
 				case IS_PART_TIME:
 					dailyWage = (WAGE_PER_HOUR * partTimeHour);
-		                        monthlyWage+=dailyWage;
+		                        monthlyWage += dailyWage;
 					break;
 				default:
 					dailyWage = 0;
-					monthlyWage+=dailyWage;
+					monthlyWage += dailyWage;
 					break;
 			}
 		}
