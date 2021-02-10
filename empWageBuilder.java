@@ -9,7 +9,7 @@ public class EmpWageBuilder {
 		System.out.println("Welcome to Employee Wage Computation Program on Master Branch");
 		int fullDayHour = 8;
 		int partTimeHour = 4;
-		int dailyWage;
+		int dailyWage = 0;
 		int monthlyWage = 0;
 		int totalWorkingHours = 0;
 		int totalWorkingDays = 0;
