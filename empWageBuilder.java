@@ -18,17 +18,17 @@ public class EmpWageBuilder {
 			switch ((int)empCheck) {
 				case IS_FULL_TIME:
 					dailyWage = (WAGE_PER_HOUR * fullDayHour);
-					monthlyWage+=dailyWage;
-					totalWorkingHours+=fullDayHour;
+					monthlyWage += dailyWage;
+					totalWorkingHours += fullDayHour;
 					break;
 				case IS_PART_TIME:
 					dailyWage = (WAGE_PER_HOUR * partTimeHour);
-		                        monthlyWage+=dailyWage;
-					totalWorkingHours+=partTimeHour;
+		                        monthlyWage += dailyWage;
+					totalWorkingHours += partTimeHour;
 					break;
 				default:
 					dailyWage = 0;
-					monthlyWage+=dailyWage;
+					monthlyWage += dailyWage;
 					break;
 			}
 			totalWorkingDays++;
