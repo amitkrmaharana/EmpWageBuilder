@@ -19,12 +19,12 @@ public class EmpWageBuilder {
 				case IS_FULL_TIME:
 					dailyWage = (WAGE_PER_HOUR * FULL_DAY_HOUR);
 					monthlyWage += dailyWage;
-					totalWorkingHours += fullDayHour;
+					totalWorkingHours += FULL_DAY_HOUR;
 					break;
 				case IS_PART_TIME:
 					dailyWage = (WAGE_PER_HOUR * PART_TIME_HOUR);
 		                        monthlyWage += dailyWage;
-					totalWorkingHours += partTimeHour;
+					totalWorkingHours += PART_TIME_HOUR;
 					break;
 				default:
 					dailyWage = 0;
