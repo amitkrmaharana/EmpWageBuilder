@@ -1,11 +1,13 @@
 public class EmpWageBuilder {
+
     public static final int IS_FULL_TIME = 1;
     public static final int IS_PART_TIME = 2;
+
 
     private final String company;
     private final int wagePerHour;
     private final int numOfWorkingDays;
-    private final int maxHoursPerMonth; 
+    private final int maxHoursPerMonth;
 
     public EmpWageBuilder(String company, int wagePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
     	this.company = company;
