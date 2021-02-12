@@ -39,13 +39,12 @@ public class EmpWageBuilder {
     }
 
     public static void main(String[] args) {
-            System.out.println("Welcome to Employee Wage Computation Program on Master Branch");
-            EmpWageBuilder dMart = new EmpWageBuilder("DMart", 20, 13, 50);
-	    EmpWageBuilder reliance = new EmpWageBuilder("RELIANCE", 23, 15, 70);
-	    EmpWageBuilder tataMotors = new EmpWageBuilder("TATA MOTORS", 18, 19, 130);
-	    System.out.println("The total monthly Wage of the Employee of the company " + dMart.company + " is " + dMart.computeEmpWage());
-            System.out.println("The total monthly Wage of the Employee of the company " + reliance.company + " is " + reliance.computeEmpWage());
-	    System.out.println("The total monthly Wage of the Employee of the company " + tataMotors.company + " is " + tataMotors.computeEmpWage());
+        System.out.println("Welcome to Employee Wage Computation Program on Master Branch");
+        EmpWageBuilder dMart = new EmpWageBuilder("DMart", 20, 13, 50);
+	EmpWageBuilder reliance = new EmpWageBuilder("RELIANCE", 23, 15, 70);
+	EmpWageBuilder tataMotors = new EmpWageBuilder("TATA MOTORS", 18, 19, 130);
+	System.out.println("The total monthly Wage of the Employee of the company " + dMart.company + " is " + dMart.computeEmpWage());
+	System.out.println("The total monthly Wage of the Employee of the company " + reliance.company + " is " + reliance.computeEmpWage());
+	System.out.println("The total monthly Wage of the Employee of the company " + tataMotors.company + " is " + tataMotors.computeEmpWage());
     }
 }
-
