@@ -1,73 +1,91 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
-class CompanyEmpWage {
-	public final String company;
-	public final int empRatePerHour;
-	public final int numOfWorkingDays;
-	public final int maxHoursPerMonth;
-	public int totalEmpWage;
-	
-	public CompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
-		this.company = company;
-		this.empRatePerHour = empRatePerHour;
-		this.numOfWorkingDays = numOfWorkingDays;
-		this.maxHoursPerMonth = maxHoursPerMonth;
-	}
-	
-	public void setTotalEmpWage(int totalEmpWage) {
-		this.totalEmpWage = totalEmpWage;
-	}
-	
-	public String toString() {
-		return "Total Employee wage for Company: " +company+" is " +totalEmpWage;
-	}
+interface IComputeEmpWage{
+    public void addCompanyEmpWage(String company, int per_hour_wage, int max_work_days, int max_work_hours);
+    public void calculateSalary();
+    public int getTotalWage(String company);
 }
 
-public class EmpWageBuilder {
+class CompanyEmpWage {
+    public String company;
+    public int per_hours_wage;
+    public int max_work_days;
+    public int max_work_hours;
+    public int salary = 0;
+
+    public CompanyEmpWage(String company, int per_hour_wage, int max_work_days, int max_work_hours) {
+        this.company = company;
+        this.per_hours_wage = per_hour_wage;
+        this.max_work_days = max_work_days;
+        this.max_work_hours = max_work_hours;
+    }
+
+    public void setTotalEmpWage(int salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Total salary for company " + company + " is : " + this.salary;
+    }
+}
+public class EmpWageBuilder  implements IComputeEmpWage {
     public static final int PRESENT_FULL_TIME = 2;
     public static final int PRESENT_PART_TIME = 1;
     public static final int IS_FULL_TIME = 8;
     public static final int IS_PART_TIME = 4;
 
-//    private int numOfCompany = 0;
+    private LinkedList<CompanyEmpWage> companyEmpWageLinkedList;
+    private Map<String, CompanyEmpWage> companyToEmpWageMap;
     private ArrayList<CompanyEmpWage> companyEmpWageArray;
 
-    public EmpWageBuilder() {
+    public EmpWageBuilder () {
+        companyEmpWageLinkedList = new LinkedList<>();
+        companyToEmpWageMap = new HashMap<>();
         companyEmpWageArray = new ArrayList<CompanyEmpWage>();
     }
 
-    private void addCompanyEmpWage(String company, int per_hour_wage, int numOfWorkingDays, int maxHoursPerMonth) {
-        companyEmpWageArray.add(new CompanyEmpWage(company, per_hour_wage, numOfWorkingDays, maxHoursPerMonth));
-//        numOfCompany++;
+    public void addCompanyEmpWage(String company, int per_hour_wage, int max_work_days, int max_work_hours) {
+        CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, per_hour_wage, max_work_days, max_work_hours);
+        companyEmpWageLinkedList.add(companyEmpWage);
+        companyToEmpWageMap.put(company, companyEmpWage);
     }
 
-    private void calculatetotalEmpWage() {
-        for (int i = 0; i < companyEmpWageArray.size(); i++) {
-            companyEmpWageArray.get(i).setTotalEmpWage(this.calculatetotalEmpWage(companyEmpWageArray.get(i)));
-            System.out.println(companyEmpWageArray.get(i));
+    @Override
+    public int getTotalWage(String company) {
+        return companyToEmpWageMap.get(company).salary;
+    }
+
+    public void calculateSalary() {
+        for (int i = 0; i < companyEmpWageLinkedList.size(); i++) {
+            CompanyEmpWage companyEmpWage = companyEmpWageLinkedList.get(i);
+            companyEmpWage.setTotalEmpWage(this.calculateSalary(companyEmpWage));
+            System.out.println(companyEmpWage);
         }
     }
 
-    private int calculatetotalEmpWage(CompanyEmpWage companyEmpWage) {
-        int work_hours = 0, work_days = 0;
-        while (work_hours < companyEmpWage.maxHoursPerMonth && work_days < companyEmpWage.numOfWorkingDays) {
+    public int calculateSalary(CompanyEmpWage companyEmpWage) {
+        int work_hours = 0, work_days = 0, daily_wage = 0;
+        while (work_hours < companyEmpWage.max_work_hours && work_days < companyEmpWage.max_work_days) {
             work_days++;
             double empcheck = Math.floor(Math.random() * 10) % 3;
             int check = (int) empcheck;
             switch (check) {
                 case PRESENT_FULL_TIME:
                     work_hours += IS_FULL_TIME;
+                    daily_wage = 8 * companyEmpWage.per_hours_wage;
                     break;
                 case PRESENT_PART_TIME:
                     work_hours += IS_PART_TIME;
+                    daily_wage = 4 * companyEmpWage.per_hours_wage;
                     break;
                 default:
                     work_hours += 0;
             }
-            System.out.println("Day" + work_days + " Total working hrs " + work_hours);
+            System.out.println("Day" + work_days + " daily wage :" + daily_wage + " Total working hrs :" + work_hours);
+            daily_wage = 0;
         }
-        return companyEmpWage.totalEmpWage = work_hours * companyEmpWage.empRatePerHour;
+        return companyEmpWage.salary = work_hours * companyEmpWage.per_hours_wage;
     }
 
     public ArrayList getCompanydetails() {
@@ -86,13 +104,14 @@ public class EmpWageBuilder {
     }
 
     public static void main(String[] args) {
-        EmpWageBuilder empWageBuilder = new EmpWageBuilder();
+        EmpWageBuilder  empWageBuilder = new EmpWageBuilder ();
         ArrayList company1details = empWageBuilder.getCompanydetails();
         empWageBuilder.addCompanyEmpWage((String) company1details.get(0), (Integer) company1details.get(1),
-                (Integer) company1details.get(2),(Integer) company1details.get(3));
+                (Integer) company1details.get(2), (Integer) company1details.get(3));
         ArrayList company2details = empWageBuilder.getCompanydetails();
         empWageBuilder.addCompanyEmpWage((String) company2details.get(0), (Integer) company2details.get(1),
-                (Integer) company2details.get(2),(Integer) company2details.get(3));
-        empWageBuilder.calculatetotalEmpWage();
+                (Integer) company2details.get(2), (Integer) company2details.get(3));
+        empWageBuilder.calculateSalary();
+        System.out.println("total wage for dmart " + empWageBuilder.getTotalWage("dmart"));
     }
 }
