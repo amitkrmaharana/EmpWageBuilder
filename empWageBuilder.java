@@ -1,75 +1,49 @@
-class CompanyEmpWage {
-	public final String company;
-	public final int empRatePerHour;
-	public final int numOfWorkingDays;
-	public final int maxHoursPerMonth;
-	public int totalEmpWage;
-	
-	public CompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
-		this.company = company;
-		this.empRatePerHour = empRatePerHour;
-		this.numOfWorkingDays = numOfWorkingDays;
-		this.maxHoursPerMonth = maxHoursPerMonth;
-	}
-	
-	public void setTotalEmpWage(int totalEmpWage) {
-		this.totalEmpWage = totalEmpWage;
-	}
-	
-	public String toString() {
-		return "Total Employee wage for Company: " +company+" is " +totalEmpWage;
-	}
-}
-
 public class EmpWageBuilder {
-    public static final int IS_FULL_TIME = 2;
-    public static final int IS_PART_TIME = 1;
+    public static final int IS_FULL_TIME = 1;
+    public static final int IS_PART_TIME = 2;
 
-    private int numOfCompany = 0;
-    private CompanyEmpWage[] companyEmpWageArray;
-    
-    public EmpWageBuilder() {
-    	companyEmpWageArray = new CompanyEmpWage[5];
+    private final String company;
+    private final int wagePerHour;
+    private final int numOfWorkingDays;
+    private final int maxHoursPerMonth;
+
+    public EmpWageBuilder(String company, int wagePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
+    	this.company = company;
+    	this.wagePerHour = wagePerHour;
+    	this.numOfWorkingDays = numOfWorkingDays;
+    	this.maxHoursPerMonth = maxHoursPerMonth;
     }
-    
-    private void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
-    	companyEmpWageArray[numOfCompany] = new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
-    	numOfCompany++;
+
+    private int computeEmpWage() {
+        int dailyWage = 0, monthlyWage = 0, totalWorkingHours = 0, totalWorkingDays = 0, empHr = 0;
+        while (totalWorkingHours < maxHoursPerMonth && totalWorkingDays < numOfWorkingDays) {
+            double empCheck = Math.floor(Math.random() * 10) % 3;
+            switch ((int)empCheck) {
+                    case IS_FULL_TIME:
+                    		empHr = 8;
+                            break;
+                    case IS_PART_TIME:
+                    		empHr = 4;
+                            break;
+                    default:
+                    		empHr = 0;
+            }
+            totalWorkingHours += empHr;
+            dailyWage = (wagePerHour * empHr);
+            monthlyWage += dailyWage;
+            totalWorkingDays++;
+        }
+        return monthlyWage;
     }
-    
-    private void computeEmpWage() {
-    	for (int i = 0; i < numOfCompany; i++) {
-    		companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
-    		System.out.println(companyEmpWageArray[i]);
-		}
-    }
-    
-    private int computeEmpWage(CompanyEmpWage companyEmpWage) {
-    	int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
-    	while(totalEmpHrs <= companyEmpWage.maxHoursPerMonth && totalWorkingDays < companyEmpWage.numOfWorkingDays) {
-    		totalWorkingDays++;
-    		int empCheck = (int)Math.floor(Math.random() * 10) % 3;
-    		switch(empCheck) {
-    		case IS_PART_TIME:
-    			empHrs = 4;
-    			break;
-    		case IS_FULL_TIME:
-    			empHrs = 8;
-    			break;
-    		default:
-    			empHrs = 0;
-    		}
-    		totalEmpHrs += empHrs;
-    		System.out.println("Day#: " + totalWorkingDays + " Emp Hr: " +empHrs);
-    	}
-    	return totalEmpHrs * companyEmpWage.empRatePerHour;
-    }
-    
+
     public static void main(String[] args) {
-    	EmpWageBuilder empWageBuilder = new EmpWageBuilder();
-    	empWageBuilder.addCompanyEmpWage("DMart", 20, 2, 18);
-    	empWageBuilder.addCompanyEmpWage("Reliance", 10, 4, 20);
-    	empWageBuilder.addCompanyEmpWage("Tata Motors", 15, 3, 17);
-    	empWageBuilder.computeEmpWage();
+	System.out.println("Welcome to Employee Wage Computation Program on Master Branch");
+    	EmpWageBuilder dMart = new EmpWageBuilder("DMart", 20, 13, 50);
+	EmpWageBuilder reliance = new EmpWageBuilder("RELIANCE", 23, 15, 70);
+	EmpWageBuilder tataMotors = new EmpWageBuilder("TATA MOTORS", 18, 19, 130);
+	System.out.println("The total monthly Wage of the Employee of the company " + dMart.company + " is " + dMart.computeEmpWage());
+	System.out.println("The total monthly Wage of the Employee of the company " + reliance.company + " is " + reliance.computeEmpWage());
+	System.out.println("The total monthly Wage of the Employee of the company " + tataMotors.company + " is " + tataMotors.computeEmpWage());
     }
+
 }
